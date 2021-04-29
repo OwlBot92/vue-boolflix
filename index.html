@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- google fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+            crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+            integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+            crossorigin="anonymous"></script>
+        <!-- VUE -->
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <!-- STYLE -->
+        <link rel="stylesheet" href="css/style.css">
+        <title>Boolflix</title>
+    </head>
+
+    <body>
+        <div id="root">
+            <header>
+                <h1>BOOLFLIX</h1>
+                <input v-model="search" type="text">
+                <button v-on:click="searchBy()">Search</button>
+            </header>
+            
+            <main>  
+
+                <!-- FILM -->
+                <h2 v-if="searchedFilms.length">FILM</h2>
+                <div class="cards-film">
+                    <div class="flip-card" v-for="film in searchedFilms">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img v-if="film.poster_path" v-bind:src="`${imgStartPath}${film.poster_path}`" alt="">
+                                <!--v-else <img src="" alt=""> --> <!-- COPERTINA NON disponibile -->
+                            </div>
+                            <div class="flip-card-back">
+                                <span>Titolo: {{film.title}}</span>
+                                <span>Titolo originale: {{film.original_title}}</span>
+                                <span>Voto: {{film.vote_average}}</span>
+                                <p>Overview: {{film.overview}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <span>{{film.original_language}}</span> -->
+
+
+                <!-- SERIE TV -->
+                <h2 v-if="searchedSeries.length">SERIE TV</h2>
+                <div class="cards-serie">
+                    <div class="flip-card" v-for="serie in searchedSeries">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img v-if="serie.poster_path" v-bind:src="`${imgStartPath}${serie.poster_path}`" alt="">
+                            </div>
+                            <div class="flip-card-back">
+                                <span>Titolo: {{serie.name}}</span>
+                                <span>Titolo originale: {{serie.original_name}}</span>
+                                <span>Voto: {{serie.vote_average}}</span>
+                                <p>Overview: {{serie.overview}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <span>{{serie.original_language}}</span> -->
+
+                    
+                
+            </main>
+        </div>
+
+        <script src="js/script.js"></script>
+    </body>
+
+</html>
