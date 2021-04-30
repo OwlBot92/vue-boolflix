@@ -19,6 +19,13 @@ header{
     align-items: center;
     justify-content: space-between;
 }
+#cast-title{
+    padding: 5px 0 2px 0;
+}
+ul li{
+    list-style: none;
+    margin-bottom: 2px;
+}
 .basics{
     outline: none;
     border: none;
@@ -84,6 +91,9 @@ h2{
 .star-row span{
     margin-right: 5px;
 }
+
+
+
 
 
 /* FLIPPING CARDS */

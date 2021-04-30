@@ -55,6 +55,15 @@
                                 </div>
                                 <p v-if="film.overview.length"> <span class="grassetto">Overview: </span>{{film.overview}}</p>
                                 <p v-else>Overview non disponibile</p>
+                                
+                                <h3 id="cast-title">CAST: </h3>
+                                <!-- v-if="film.credits.length" -->
+                                <ul>
+                                    <li v-for="a in film.credits">{{a}}</li>
+                                </ul>
+                                <span v-else>N/A</span>
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -79,6 +88,13 @@
                                 </div>
                                 <p v-if="serie.overview.length"> <span class="grassetto">Overview: </span>{{serie.overview}}</p>
                                 <p v-else>Overview non disponibile</p>
+                                <h3 id="cast-title">CAST: </h3>
+                                <!-- v-if="serie.credits.length" -->
+                                <ul>
+                                    <li v-for="a in serie.credits">{{a}}</li>
+                                </ul>
+                                <span v-else>N/A</span>
+                                
                             </div>
                         </div>
                     </div>
