@@ -27,12 +27,17 @@
         <div id="root">
             <header>
                 <h1>BOOLFLIX</h1>
-                <input v-model="search" type="text">
-                <button v-on:click="searchBy()">Search</button>
+                <div class="input-box">
+                    <i class="fas fa-search" v-on:click="searchExpand()"></i>
+                    <input v-model="search" type="text" class="basics" v-bind:class="widthGrow">
+                    <button v-on:click="searchBy()">Search</button>
+                </div>
             </header>
             
             <main>  
-
+                <div v-if="searchedFilms.length == 0 && searchedSeries.length == 0">
+                    <h2>CERCA I FILM E LE TUE SERIE TV PREFERITE</h2>
+                </div>
                 <!-- FILM -->
                 <h2 v-if="searchedFilms.length">FILM</h2>
                 <div class="cards-film">
@@ -40,13 +45,16 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img v-if="film.poster_path" v-bind:src="`${imgStartPath}${film.poster_path}`" alt="">
-                                <!--v-else <img src="" alt=""> --> <!-- COPERTINA NON disponibile -->
                             </div>
                             <div class="flip-card-back">
-                                <span>Titolo: {{film.title}}</span>
-                                <span>Titolo originale: {{film.original_title}}</span>
-                                <span>Voto: {{film.vote_average}}</span>
-                                <p>Overview: {{film.overview}}</p>
+                                <span><span class="grassetto">Titolo: </span>{{film.title}}</span>
+                                <span><span class="grassetto">Titolo Originale: </span>{{film.original_title}}</span>
+                                <div class="star-row">
+                                    <span class="grassetto">Voto: </span>
+                                    <i v-for="n in film.vote_average" class="fas fa-star"></i>
+                                </div>
+                                <p v-if="film.overview.length"> <span class="grassetto">Overview: </span>{{film.overview}}</p>
+                                <p v-else>Overview non disponibile</p>
                             </div>
                         </div>
                     </div>
@@ -63,10 +71,14 @@
                                 <img v-if="serie.poster_path" v-bind:src="`${imgStartPath}${serie.poster_path}`" alt="">
                             </div>
                             <div class="flip-card-back">
-                                <span>Titolo: {{serie.name}}</span>
-                                <span>Titolo originale: {{serie.original_name}}</span>
-                                <span>Voto: {{serie.vote_average}}</span>
-                                <p>Overview: {{serie.overview}}</p>
+                                <span><span class="grassetto">Titolo: </span>{{serie.name}}</span>
+                                <span><span class="grassetto">Titolo Originale: </span>{{serie.original_name}}</span>
+                                <div class="star-row">
+                                    <span class="grassetto">Voto: </span>
+                                    <i v-for="n in serie.vote_average" class="fas fa-star"></i>
+                                </div>
+                                <p v-if="serie.overview.length"> <span class="grassetto">Overview: </span>{{serie.overview}}</p>
+                                <p v-else>Overview non disponibile</p>
                             </div>
                         </div>
                     </div>

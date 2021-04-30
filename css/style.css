@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.grassetto{
+    font-weight: 900;
+}
 body{
     font-family: "roboto", "sans-serif";
     background-color: rgb(41, 41, 41);
@@ -13,7 +15,48 @@ header{
     background-color: rgb(41, 41, 41);
     padding: 20px 40px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+.basics{
+    outline: none;
+    border: none;
+    margin-right: 10px;
+    width: 0;
+    padding: 5px;
+    background-color: rgb(41, 41, 41);
+    transition: .5s all;
+}
+.width-grow{
+    width: 150px;
+    background-color: white;
+}
+
+.input-box i{
+    color: grey;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+
+.input-box button{
+    background-color: white;
+    font-weight: 500;
+    border-radius: 3px;
+    font-family: "roboto", "sans-serif";
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
+}
+.input-box button:hover{
+    background-color: #e50914;
+    color: white;
+    transform: scale(1.1);
+}
+
 h1{
     color: #e50914;
 }
@@ -30,6 +73,20 @@ h2{
     padding: 0 46px;
     color: white;
 }
+
+.star-row{
+    display: flex;
+}
+.star-row i{
+    margin-right: 5px;
+    color: rgb(255, 208, 0);
+}
+.star-row span{
+    margin-right: 5px;
+}
+
+
+/* FLIPPING CARDS */
 .cards-film,
 .cards-serie{
     overflow-x: auto;
@@ -44,7 +101,6 @@ h2{
     margin-bottom: 20px;
 }
 
-/* FLIPPING CARDS */
 .flip-card {
     cursor: pointer;
     background-color: transparent;
