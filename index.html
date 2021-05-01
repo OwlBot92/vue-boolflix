@@ -28,24 +28,54 @@
             <header>
                 <h1>BOOLFLIX</h1>
                 <div class="input-box">
+
+                    <!-- RICERCA GENERE SERIE TV -->
+                    <div v-if="searchedSeries.length" class="serie-film-select">
+                        <h3>TV SHOW</h3>
+                        <select v-model="selectChoiceSerie" name="" id="">
+                            <!-- <option value="">ALL</option> -->
+                            <option v-for="genere in serieGenreSet">{{genere}}</option>
+                        </select>
+                    </div>
+
+                    <!-- RICERCA GENERE MOVIE --> 
+                    <div v-if="searchedFilms.length" class="serie-film-select">
+                        <h3>MOVIE</h3>
+                        <select v-model="selectChoiceFilm" name="" id="">
+                            <!-- <option value="">ALL</option> -->
+                            <option v-for="genere in filmGenreSet">{{genere}}</option>
+                        </select>
+                    </div>
+    
+                    <!-- input di ricerca serie e film -->
                     <i class="fas fa-search" v-on:click="searchExpand()"></i>
                     <input v-model="search" type="text" class="basics" v-bind:class="widthGrow">
                     <button v-on:click="searchBy()">Search</button>
                 </div>
+                
             </header>
             
             <main>  
-                <div v-if="searchedFilms.length == 0 && searchedSeries.length == 0">
+                <!-- INFO PROFILO -->
+                <div class="user-box" v-if="searchedFilms.length == 0 && searchedSeries.length == 0">
+                    <!-- suggerimento what to do -->
                     <h2>CERCA I FILM E LE TUE SERIE TV PREFERITE</h2>
+                    <!-- immagine e username -->
+                    <div class="picture-user-name-box">
+                        <img src="img/netflix-picture2.png" alt="">
+                        <h4>Nico</h4>
+                    </div>
                 </div>
+
                 <!-- FILM -->
                 <h2 v-if="searchedFilms.length">FILM</h2>
                 <div class="cards-film">
-                    <div class="flip-card" v-for="film in searchedFilms">
+                    <div class="flip-card" v-for="film in filterBySelect(searchedFilms, selectChoiceFilm)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img v-if="film.poster_path" v-bind:src="`${imgStartPath}${film.poster_path}`" alt="">
                             </div>
+                            <!-- INFORMAZIONI FILM -->
                             <div class="flip-card-back">
                                 <span><span class="grassetto">Titolo: </span>{{film.title}}</span>
                                 <span><span class="grassetto">Titolo Originale: </span>{{film.original_title}}</span>
@@ -54,14 +84,17 @@
                                     <i v-for="n in film.vote_average" class="fas fa-star"></i>
                                 </div>
                                 <p v-if="film.overview.length"> <span class="grassetto">Overview: </span>{{film.overview}}</p>
-                                <p v-else>Overview non disponibile</p>
+                                <p id="overview-unav" v-else>Overview non disponibile</p>
                                 
-                                <h3 id="cast-title">CAST: </h3>
-                                <!-- v-if="film.credits.length" -->
+                                <h3 id="cast-gen-title">CAST: </h3>
                                 <ul>
                                     <li v-for="a in film.credits">{{a}}</li>
                                 </ul>
-                                <span v-else>N/A</span>
+                                
+                                <h3 id="cast-gen-title">GENERI: </h3>
+                                <ul>
+                                    <li v-for="s in film.generi">{{ s }}</li>
+                                </ul>
                                 
                                 
                             </div>
@@ -74,7 +107,7 @@
                 <!-- SERIE TV -->
                 <h2 v-if="searchedSeries.length">SERIE TV</h2>
                 <div class="cards-serie">
-                    <div class="flip-card" v-for="serie in searchedSeries">
+                    <div class="flip-card" v-for="serie in filterBySelect(searchedSeries, selectChoiceSerie)">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img v-if="serie.poster_path" v-bind:src="`${imgStartPath}${serie.poster_path}`" alt="">
@@ -88,12 +121,17 @@
                                 </div>
                                 <p v-if="serie.overview.length"> <span class="grassetto">Overview: </span>{{serie.overview}}</p>
                                 <p v-else>Overview non disponibile</p>
-                                <h3 id="cast-title">CAST: </h3>
+                                <h3 id="cast-gen-title">CAST: </h3>
                                 <!-- v-if="serie.credits.length" -->
                                 <ul>
-                                    <li v-for="a in serie.credits">{{a}}</li>
+                                    <li v-for="a in serie.credits">{{ a }}</li>
                                 </ul>
-                                <span v-else>N/A</span>
+
+                                <h3 id="cast-gen-title">GENERI: </h3>
+                                <ul>
+                                    <li v-for="s in serie.generi">{{ s }}</li>
+                                </ul>
+                                
                                 
                             </div>
                         </div>

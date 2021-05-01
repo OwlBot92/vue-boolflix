@@ -6,6 +6,10 @@
 .grassetto{
     font-weight: 900;
 }
+#overview-unav{
+    color: #acacac;
+    margin-bottom: 10px;
+}
 body{
     font-family: "roboto", "sans-serif";
     background-color: rgb(41, 41, 41);
@@ -19,7 +23,7 @@ header{
     align-items: center;
     justify-content: space-between;
 }
-#cast-title{
+#cast-gen-title{
     padding: 5px 0 2px 0;
 }
 ul li{
@@ -27,6 +31,8 @@ ul li{
     margin-bottom: 2px;
 }
 .basics{
+    font-family: "roboto", "sans-serif";
+    font-weight: 600;
     outline: none;
     border: none;
     margin-right: 10px;
@@ -40,20 +46,46 @@ ul li{
     background-color: white;
 }
 
+.input-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.serie-film-select{
+    position: relative;
+    margin-right: 30px;
+    transition: .4s all;
+}
+.serie-film-select select{
+    font-family: "roboto", "sans-serif";
+    outline: none;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border: none;
+    border-bottom: 1px solid #e50914;
+    padding: 5px;
+}
+.serie-film-select h3{
+    margin-left: 4px;
+    margin-bottom: 3px;
+    padding: 5px;
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    bottom:20px;
+}
+
 .input-box i{
     color: grey;
     margin-right: 5px;
     cursor: pointer;
 }
-
-
-
 .input-box button{
     background-color: white;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 3px;
     font-family: "roboto", "sans-serif";
-    padding: 5px;
+    padding: 5px 10px;
     border: none;
     cursor: pointer;
     transition: .2s;
@@ -68,6 +100,27 @@ h1{
     color: #e50914;
 }
 
+.user-box{
+    width: 100%;
+}
+/* picture user name box */
+.picture-user-name-box{
+    width: 100%;
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.picture-user-name-box img{
+    width: 250px;
+}
+.picture-user-name-box h4{
+    color: white;
+    margin-top: 15px;
+    font-size: 25px;
+}
+
 
 /* MAIN */
 main{
@@ -77,7 +130,7 @@ main{
     justify-content: center;
 }
 h2{
-    padding: 0 46px;
+    padding: 0 40px;
     color: white;
 }
 
