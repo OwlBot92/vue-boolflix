@@ -23,6 +23,9 @@ header{
     align-items: center;
     justify-content: space-between;
 }
+header h1{
+    cursor: pointer;
+}
 #cast-gen-title{
     padding: 5px 0 2px 0;
 }

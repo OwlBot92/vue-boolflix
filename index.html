@@ -26,7 +26,7 @@
     <body>
         <div id="root">
             <header>
-                <h1>BOOLFLIX</h1>
+                <h1 v-on:click="backToHomePage()">BOOLFLIX</h1>
                 <div class="input-box">
 
                     <!-- RICERCA GENERE SERIE TV -->
@@ -49,7 +49,7 @@
     
                     <!-- input di ricerca serie e film -->
                     <i class="fas fa-search" v-on:click="searchExpand()"></i>
-                    <input v-model="search" type="text" class="basics" v-bind:class="widthGrow">
+                    <input v-model="search" type="text" class="basics" v-bind:class="widthGrow" v-on:keyup.enter="searchBy()">
                     <button v-on:click="searchBy()">Search</button>
                 </div>
                 

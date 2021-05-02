@@ -33,8 +33,6 @@ var app = new Vue({
 
     /*
     MORE
-    - implementare possibilità di cercare premendo invio
-    - implementare ritorno alla pagina iniziale cliccando su BOOLFLIX
     - commentare nel dettaglio il funzionamento della funzione searchBy()
     - rimuovere console.log di debug
 
@@ -67,7 +65,8 @@ var app = new Vue({
                             //CAST
                             this.getCast(obj.id, "movie")
                                 .then(data => {
-                                    obj.credits = data
+                                    (data.length) ? obj.credits = data : obj.credits = ["N/A"]
+                                    //obj.credits = data
                                     castFilmsArray.push(obj);
                                     this.searchedFilms = castFilmsArray;
                                 })
@@ -192,6 +191,10 @@ var app = new Vue({
         filterByLang(array){
             return array.filter((obj) => obj.original_language == "en" && obj.poster_path != null)
         },
+        backToHomePage(){
+            this.searchedFilms = [];
+            this.searchedSeries = [];
+        },
         /* ----- FUNZIONI PER LO STYLING ----- */
         searchExpand(){
             (this.widthGrow.length) ? this.widthGrow = "" : this.widthGrow = "width-grow";
@@ -199,6 +202,7 @@ var app = new Vue({
     },
     //inutilizzata
     mounted(){
+        
     }
 })
 
