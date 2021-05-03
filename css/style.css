@@ -36,6 +36,7 @@ ul li{
 }
 .basics{
     font-family: "roboto", "sans-serif";
+    border-radius: 3px;
     font-weight: 600;
     outline: none;
     border: none;
@@ -115,10 +116,13 @@ ul li{
 .picture-user-name-box img{
     width: 250px;
 }
+.circle-logo{
+    display: none;
+}
 .picture-user-name-box h4{
     color: white;
     margin-top: 15px;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 
@@ -226,13 +230,16 @@ h2{
 
 
 
-
-
-
-
-
-
-
+@media screen and (max-width: 500px){
+    .classic-logo{
+        display: none;
+    }
+    .circle-logo{
+        display: inline-block;
+        width: 150px;
+    }
+}
+    
 
 
 

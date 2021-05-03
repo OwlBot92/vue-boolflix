@@ -127,6 +127,7 @@ var app = new Vue({
             }
             this.search = "";
         },
+        
         //converte la chiave corrispondente alla lingua originale del film nel path dell'immagine
         flagConverter(obj){
             switch (obj.original_language){
