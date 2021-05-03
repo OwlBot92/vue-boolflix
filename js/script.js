@@ -123,20 +123,17 @@ var app = new Vue({
                                     this.searchedSeries = genreSerieArray;
                                 })
                         }
-                        console.log(this.searchedSeries);
-                        
                     })
             }
             this.search = "";
         },
-
+        
         //per estrapolare i generi
         getGenres(id, from){
             let url = `https://api.themoviedb.org/3/${from}/${id}?api_key=e05661b069389f9a2788162b272f96a8`
             return axios
                 .get(url)
                 .then((response) => {
-                    //(from == "movie") ? this.filmGenreSet.add("ALL") : this.serieGenreSet.add("ALL");
                     if (from == "movie") {
                         this.filmGenreSet.add("ALL");
                         for (const obj of response.data.genres) {

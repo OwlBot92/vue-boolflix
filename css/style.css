@@ -23,7 +23,8 @@ header{
     align-items: center;
     justify-content: space-between;
 }
-header h1{
+header img{
+    width: 200px;
     cursor: pointer;
 }
 #cast-gen-title{
@@ -99,10 +100,6 @@ ul li{
     transform: scale(1.1);
 }
 
-h1{
-    color: #e50914;
-}
-
 .user-box{
     width: 100%;
 }
@@ -133,7 +130,7 @@ main{
     justify-content: center;
 }
 h2{
-    padding: 0 40px;
+    padding: 5px 45px;
     color: white;
 }
 
