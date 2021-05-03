@@ -81,6 +81,11 @@
                             <div class="flip-card-back">
                                 <span><span class="grassetto">Titolo: </span>{{film.title}}</span>
                                 <span><span class="grassetto">Titolo Originale: </span>{{film.original_title}}</span>
+                                <div class="lang-box">
+                                    <span class="grassetto">Original language: </span>
+                                    <img v-if="flagConverter(film).length" v-bind:src="flagConverter(film)" class="flag"></img>
+                                    <span v-else>N/A</span>
+                                </div>
                                 <div class="star-row">
                                     <span class="grassetto">Voto: </span>
                                     <i v-for="n in film.vote_average" class="fas fa-star"></i>
@@ -117,6 +122,11 @@
                             <div class="flip-card-back">
                                 <span><span class="grassetto">Titolo: </span>{{serie.name}}</span>
                                 <span><span class="grassetto">Titolo Originale: </span>{{serie.original_name}}</span>
+                                <div class="lang-box">
+                                    <span class="grassetto">Original language: </span>
+                                    <img v-if="flagConverter(serie).length" v-bind:src="flagConverter(serie)" class="flag"></img>
+                                    <span v-else>N/A</span>
+                                </div>
                                 <div class="star-row">
                                     <span class="grassetto">Voto: </span>
                                     <i v-for="n in serie.vote_average" class="fas fa-star"></i>
@@ -124,7 +134,7 @@
                                 <p v-if="serie.overview.length"> <span class="grassetto">Overview: </span>{{serie.overview}}</p>
                                 <p v-else>Overview non disponibile</p>
                                 <h3 id="cast-gen-title">CAST: </h3>
-                                <!-- v-if="serie.credits.length" -->
+                                
                                 <ul>
                                     <li v-for="a in serie.credits">{{ a }}</li>
                                 </ul>

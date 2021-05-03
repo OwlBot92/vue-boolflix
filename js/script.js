@@ -26,6 +26,7 @@ var app = new Vue({
         imgStartPath: "https://image.tmdb.org/t/p/w342",
 
         
+
         /* ----- STYLING RELATED ---- */
         widthGrow : "",
     },
@@ -34,11 +35,7 @@ var app = new Vue({
     /*
     MORE
     - commentare nel dettaglio il funzionamento della funzione searchBy()
-    - rimuovere console.log di debug
 
-    MS4
-    - implementare lingua => bandiera
-     
     */
 
     methods: {
@@ -127,7 +124,17 @@ var app = new Vue({
             }
             this.search = "";
         },
-        
+        //converte la chiave corrispondente alla lingua originale del film nel path dell'immagine
+        flagConverter(obj){
+            switch (obj.original_language){
+                case "en":
+                    return "img/en.png";
+                case "it":
+                    return "img/it.png"
+                default:
+                    return ""
+            }
+        },
         //per estrapolare i generi
         getGenres(id, from){
             let url = `https://api.themoviedb.org/3/${from}/${id}?api_key=e05661b069389f9a2788162b272f96a8`
@@ -186,7 +193,7 @@ var app = new Vue({
         },
         //per evitare film e serie tv da tutto il mondo
         filterByLang(array){
-            return array.filter((obj) => obj.original_language == "en" && obj.poster_path != null)
+            return array.filter((obj) => (obj.original_language == "en" || obj.original_language == "it") && obj.poster_path != null)
         },
         backToHomePage(){
             this.searchedFilms = [];
