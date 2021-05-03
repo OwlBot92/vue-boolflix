@@ -48,44 +48,47 @@ var app = new Vue({
             this.selectChoiceSerie = "ALL";
             this.selectChoiceFilm = "ALL";
 
+            //se il campo di input non è vuoto
             if (this.search.length) {
                 //CHIAMATA per i film con titolo che corrisponde al campo di ricerca
                 axios
                     .get(`${this.urlFilm}${this.search}`)
                     .then((response) => {
                         let ris1 = response.data.results;
-                        let castFilmsArray = [];
-                        let genreMovieArray = [];
-                        this.searchedFilms = this.filterByLang(ris1);
-                        this.voteTransform(this.searchedFilms);
+                        let castFilmsArray = []; //array che conterrà i film con l'aggiunta di una chiave per il cast
+                        let genreMovieArray = []; //array che conterrà i film con l'aggiunta di una chiave per i generi
+                        this.searchedFilms = this.filterByLang(ris1); //filtra alcune lingue, solo per una questione grafica
+                        this.voteTransform(this.searchedFilms); //trasforma il voto 
+                        
+                        //itera sugli oggetti risultato della chiamata API
                         for (const obj of this.searchedFilms) {
                             //CAST
-                            this.getCast(obj.id, "movie")
+                            this.getCast(obj.id, "movie") //chiamata usando l'id del film per prendere i primi 5 attori del cast (vedere riga 164)
                                 .then(data => {
-                                    (data.length) ? obj.credits = data : obj.credits = ["N/A"]
-                                    //obj.credits = data
-                                    castFilmsArray.push(obj);
-                                    this.searchedFilms = castFilmsArray;
+                                    (data.length) ? obj.credits = data : obj.credits = ["N/A"] //se l'elenco è vuoto la chiave per il cast contiene solo [N/A]
+                                    castFilmsArray.push(obj);  // popola l'array castFilmsArray con gli obj a cui è stata aggiunga la chiave con il cast 
+                                    this.searchedFilms = castFilmsArray; // salva il nuovo array nell'array da usare nell'html
                                 })
                             //GENERI da aggiungere, come nelle serie
-                            this.getGenres(obj.id, "movie")
+                            this.getGenres(obj.id, "movie") //chiamata usando l'id del film per prendere i generi associati (vedere riga 141)
                                 .then(data => {
-                                    if (!data.length) {
+                                    if (!data.length) { //se vuoto popola con [N/A]
                                         obj.generi = ["N/A"];
                                     }
-                                    else {
-                                        let temp = [];
-                                        for (const iterator of data) {
-                                            temp.push(iterator.name);
+                                    else { 
+                                        let temp = []; //array temporaneo 
+                                        for (const iterator of data) { //itera sul data che è un oggetto che contiene: intero : stringa OVVERO id : genere
+                                            temp.push(iterator.name); //push il valore(genere) dentro l'array temp
                                         }
-                                        obj.generi = temp;
+                                        obj.generi = temp; //crea una nuova chiave nell'oggetto che si chiama generi e contiene un'array con i generi del film
                                     }
-                                    genreMovieArray.push(obj)
-                                    this.searchedFilms = genreMovieArray;
+                                    genreMovieArray.push(obj)  // popola l'array genreMovieArray con gli obj a cui è stata aggiunga la chiave con i generi
+                                    this.searchedFilms = genreMovieArray; //salva il nuovo array nell'array da usare nell'html
                                 })
                         }
                     })
-
+            
+                
                 //CHIAMATA per le serie con titolo che corrisponde al campo di ricerca
                 axios
                     .get(`${this.urlSerie}${this.search}`)
@@ -143,17 +146,17 @@ var app = new Vue({
                 .then((response) => {
                     if (from == "movie") {
                         this.filmGenreSet.add("ALL");
-                        for (const obj of response.data.genres) {
+                        for (const obj of response.data.genres) { //itera sui generi dei film e li aggiunge ad un insieme da usare per la selezione tramite genere (HTML riga 39)
                             this.filmGenreSet.add(obj.name);
                         }
                     }
                     else{
                         this.serieGenreSet.add("ALL");
-                        for (const obj of response.data.genres) {
+                        for (const obj of response.data.genres) { //itera sui generi delle serie e li aggiunge ad un insieme da usare per la selezione tramite genere (HTML riga 48)
                             this.serieGenreSet.add(obj.name);
                         }
                     }
-                    return response.data.genres
+                    return response.data.genres 
                 })
         },
 
@@ -195,6 +198,7 @@ var app = new Vue({
         filterByLang(array){
             return array.filter((obj) => (obj.original_language == "en" || obj.original_language == "it") && obj.poster_path != null)
         },
+        //resetta gli array con la ricerca film/serie per tornare alla pagina iniziale
         backToHomePage(){
             this.searchedFilms = [];
             this.searchedSeries = [];
@@ -206,7 +210,6 @@ var app = new Vue({
     },
     //inutilizzata
     mounted(){
-        
     }
 })
 
