@@ -80,7 +80,7 @@ var app = new Vue({
                                         for (const iterator of data) { //itera sul data che è un oggetto che contiene: intero : stringa OVVERO id : genere
                                             temp.push(iterator.name); //push il valore(genere) dentro l'array temp
                                         }
-                                        obj.generi = temp; //crea una nuova chiave nell'oggetto che si chiama generi e contiene un'array con i generi del film
+                                        obj.generi = temp; //crea una nuova chiave (generi) nell'oggetto cher conterrà un'array con i generi del film
                                     }
                                     genreMovieArray.push(obj)  // popola l'array genreMovieArray con gli obj a cui è stata aggiunga la chiave con i generi
                                     this.searchedFilms = genreMovieArray; //salva il nuovo array nell'array da usare nell'html
