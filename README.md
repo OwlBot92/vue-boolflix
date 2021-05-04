@@ -3,9 +3,9 @@
 ## Quick Demo
 ![Gif](/readme-files/boolflix-demo-gif.gif "Quick gif demo")
 
-## Light Theme
+## Main Page
 ![light](/readme-files/Boolflix.png "Main page previw")
 
-## Dark Theme
+## Showing search results
 ![dark](/readme-files/boolflix2.png "Showing results")
 
