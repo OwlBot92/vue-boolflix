@@ -57,11 +57,9 @@ var app = new Vue({
                         let ris1 = response.data.results;
                         this.searchedFilms = this.filterByLang(ris1); //filtra alcune lingue, solo per una questione grafica
                         this.voteTransform(this.searchedFilms); //trasforma il voto 
-
                         //itera sugli oggetti risultato della chiamata API
                         this.iterator(this.searchedFilms, "movie");
                     })
-
 
                 //CHIAMATA per le serie con titolo che corrisponde al campo di ricerca
                 axios
